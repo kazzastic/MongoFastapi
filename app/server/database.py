@@ -59,4 +59,7 @@ async def delete_student(id: str):
     student = await student_collection.find_one({
         "_id": ObjectId(id)
     })
-    return True
+    if student:
+        await student_collection.delete_one({"_id": ObjectId(id)})
+        return True
+    return False
